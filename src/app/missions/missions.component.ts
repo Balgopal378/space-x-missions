@@ -17,6 +17,12 @@ export class MissionsComponent implements OnInit, OnDestroy {
     private readonly destroy$ = new Subject<void>();
     @Input() launchList: LaunchDetail[];
 
+    prevQueryParam = {
+        launch_year: null,
+        launch_success: null,
+        land_success: null
+    };
+
     constructor(
         private readonly apiService: ApiService,
         private readonly router: Router,
@@ -42,7 +48,8 @@ export class MissionsComponent implements OnInit, OnDestroy {
     }
 
     private navigate(route: any[], queryParams: { [key: string]: any }) {
-        queryParams = this.encodeQueryParam(queryParams);
+        queryParams = this.remeberLastQuery(this.encodeQueryParam(queryParams));
+        // queryParams = this.encodeQueryParam(queryParams);
         this.router.navigate(route, {
             relativeTo: this.activatedRoute,
             queryParams,
@@ -50,7 +57,7 @@ export class MissionsComponent implements OnInit, OnDestroy {
         });
     }
 
-    private encodeQueryParam(params: { [key: string]: string | number | boolean }): { [key: string]: string | number | boolean } {
+    private encodeQueryParam(params: { [key: string]: string }): { [key: string]: string } {
         const encodedQueryParams = {};
         if (params) {
             if (params.name === 'year' ) {
@@ -64,6 +71,32 @@ export class MissionsComponent implements OnInit, OnDestroy {
             }
         }
         return encodedQueryParams;
+    }
+
+    private remeberLastQuery(params: { [key: string]: string }) {
+
+        const updatedParam = { ...this.prevQueryParam, ...params };
+        if (params.launch_year === this.prevQueryParam.launch_year) {
+            updatedParam.launch_year = null;
+            this.prevQueryParam.launch_year = null;
+        } else {
+            this.prevQueryParam.launch_year = updatedParam.launch_year;
+        }
+
+        if (params.launch_success === this.prevQueryParam.launch_success) {
+            updatedParam.launch_success = null;
+            this.prevQueryParam.launch_success = null;
+        } else {
+            this.prevQueryParam.launch_success = updatedParam.launch_success;
+        }
+
+        if (params.land_success === this.prevQueryParam.land_success) {
+            updatedParam.land_success = null;
+            this.prevQueryParam.land_success = null;
+        } else {
+            this.prevQueryParam.land_success = updatedParam.land_success;
+        }
+        return updatedParam;
     }
 
     onYearFilterChange(val: {[key: string]: string}) {

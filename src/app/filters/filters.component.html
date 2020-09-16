@@ -2,7 +2,7 @@
     <h3>Filters</h3>
     <p class="filter-criteria">Launch Year</p>
     <div class="filter-container">
-        <div *ngFor="let option of yearFilterOptions" (click)="onYearFilterOptionsClick($event)">
+        <div *ngFor="let option of yearFilterOptions" (click)="onYearFilterOptionsClick($event)" #yearChips>
             <app-chip
                 [option]="option"
                 (yearFilterChanged)="onYearFilterChange($event)"
@@ -13,7 +13,7 @@
     </div>
     <p class="filter-criteria">Successful Launch</p>
     <div class="filter-container">
-        <div *ngFor="let option of launchFilterOptions" (click)="onLaunchFilterOptionsClick($event)">
+        <div *ngFor="let option of launchFilterOptions" (click)="onLaunchFilterOptionsClick($event)" #launchChips>
             <app-chip
                 [option]="option"
                 (yearFilterChanged)="onYearFilterChange($event)"
@@ -24,7 +24,7 @@
     </div>
     <p class="filter-criteria">Successful Landing</p>
     <div class="filter-container">
-        <div *ngFor="let option of landingFilterOptions" (click)="onLandFilterOptionsClick($event)">
+        <div *ngFor="let option of landingFilterOptions" (click)="onLandFilterOptionsClick($event)" #landChips>
             <app-chip
                 [option]="option"
                 (yearFilterChanged)="onYearFilterChange($event)"
