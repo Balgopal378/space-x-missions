@@ -1,12 +1,18 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, ViewChildren, ElementRef, QueryList, AfterViewInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+
 import { LAUNCH_YEAR_FILTERS, SUCCESSFULL_LANDING_FILTERS, SUCCESSFULL_LAUNCH_FILTERS } from '../constants/filters.constant';
+import { ChipComponent } from '../chip/chip.component';
 
 @Component({
   selector: 'app-filters',
   templateUrl: './filters.component.html',
   styleUrls: ['./filters.component.css']
 })
-export class FiltersComponent implements OnInit {
+export class FiltersComponent implements OnInit, AfterViewInit {
+    @ViewChildren('yearChips') yearChipsRef: QueryList<ChipComponent>;
+    @ViewChildren('launchChips') launchChipsRef: QueryList<ChipComponent>;
+    @ViewChildren('landChips') landChipsRef: QueryList<ChipComponent>;
     @Output() yearFilterChanged: EventEmitter<{[key: string]: string}> = new EventEmitter(null);
     @Output() launchFilterChanged: EventEmitter<{[key: string]: string}> = new EventEmitter(null);
     @Output() landingFilterChanged: EventEmitter<{[key: string]: string}> = new EventEmitter(null);
@@ -16,9 +22,33 @@ export class FiltersComponent implements OnInit {
     yearFilterOptions = LAUNCH_YEAR_FILTERS;
     launchFilterOptions = SUCCESSFULL_LAUNCH_FILTERS;
     landingFilterOptions = SUCCESSFULL_LANDING_FILTERS;
-    constructor() { }
+    searchParams = {} as { [key: string]: string };
+
+    constructor(private readonly activatedRoute: ActivatedRoute) { }
 
     ngOnInit(): void {
+        const landSuccess = this.activatedRoute.snapshot.queryParamMap.get('land_success');
+        const launchSuccess = this.activatedRoute.snapshot.queryParamMap.get('launch_success');
+        this.searchParams = {
+            year: this.activatedRoute.snapshot.queryParamMap.get('launch_year'),
+            launch: !launchSuccess ? null : launchSuccess === 'true' ? 'True' : 'False',
+            land: !landSuccess ? null : landSuccess === 'true' ? 'True' : 'False'
+        };
+    }
+
+    ngAfterViewInit() {
+        if (this.searchParams && this.searchParams.year) {
+            this.highlightFilters(this.searchParams, this.yearChipsRef.toArray(), 'year');
+        }
+
+        if (this.searchParams && this.searchParams.launch) {
+            this.highlightFilters(this.searchParams, this.launchChipsRef.toArray(), 'launch');
+        }
+
+        if (this.searchParams && this.searchParams.land) {
+            this.highlightFilters(this.searchParams, this.landChipsRef.toArray(), 'land');
+        }
+
     }
 
     onYearFilterChange(val: {[key: string]: string}) {
@@ -96,6 +126,23 @@ export class FiltersComponent implements OnInit {
             } else {
                 clickedElement.className += ' active';
                 this.previousLandElement = clickedElement;
+            }
+        }
+    }
+
+    private highlightFilters(searchParams, eleRef, key) {
+        for (const ele of eleRef) {
+            if (ele.nativeElement.innerText === searchParams[key]) {
+                ele.nativeElement.children[0].childNodes[0].className += ' active';
+                if (key === 'year') {
+                    this.previousYearElement = ele.nativeElement.children[0].childNodes[0];
+                }
+                if (key === 'launch') {
+                    this.previousLaunchElement = ele.nativeElement.children[0].childNodes[0];
+                }
+                if (key === 'land') {
+                    this.previousLandElement = ele.nativeElement.children[0].childNodes[0];
+                }
             }
         }
     }

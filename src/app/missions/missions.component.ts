@@ -23,7 +23,7 @@ export class MissionsComponent implements OnInit, OnDestroy {
         launch_year: null,
         launch_success: null,
         land_success: null
-    };
+    } as Params;
 
     constructor(
         private readonly apiService: ApiService,
@@ -43,6 +43,7 @@ export class MissionsComponent implements OnInit, OnDestroy {
 
     private loadMissions(filters?: Params) {
         this.showSpinner = true;
+        this.prevQueryParam = { ...this.prevQueryParam, ...filters };
         return this.apiService.getLaunches(filters);
     }
 
