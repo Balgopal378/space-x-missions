@@ -1,0 +1,13 @@
+.chip {
+    background-color: #acf2b0;
+    border: none;
+    padding: 0.3em;
+    outline:none;
+    margin: 0.5em;
+}
+
+.active{
+    background-color: #2fd438;
+    border: none;
+    outline:none;
+}
