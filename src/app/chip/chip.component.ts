@@ -11,14 +11,12 @@ export class ChipComponent implements OnInit {
     @Output() launchFilterChanged: EventEmitter<{[key: string]: string}> = new EventEmitter(null);
     @Output() landingFilterChanged: EventEmitter<{[key: string]: string}> = new EventEmitter(null);
 
-    isClicked = false;
     constructor() { }
 
     ngOnInit(): void {
     }
 
     onClick(val: {[key: string]: string}) {
-        // this.isClicked = !this.isClicked;
         if (val.name === 'year') {
             this.yearFilterChanged.emit(val);
         }
