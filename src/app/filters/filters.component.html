@@ -1,0 +1,36 @@
+<div class="filters">
+    <h3>Filters</h3>
+    <p class="filter-criteria">Launch Year</p>
+    <div class="filter-container">
+        <div *ngFor="let option of yearFilterOptions" (click)="onYearFilterOptionsClick($event)">
+            <app-chip
+                [option]="option"
+                (yearFilterChanged)="onYearFilterChange($event)"
+                (launchFilterChanged)="onLaunchFilterChange($event)"
+                (landingFilterChanged)="onLandingFilterChange($event)"
+            ></app-chip>
+        </div>
+    </div>
+    <p class="filter-criteria">Successful Launch</p>
+    <div class="filter-container">
+        <div *ngFor="let option of launchFilterOptions" (click)="onLaunchFilterOptionsClick($event)">
+            <app-chip
+                [option]="option"
+                (yearFilterChanged)="onYearFilterChange($event)"
+                (launchFilterChanged)="onLaunchFilterChange($event)"
+                (landingFilterChanged)="onLandingFilterChange($event)"
+            ></app-chip>
+        </div>
+    </div>
+    <p class="filter-criteria">Successful Landing</p>
+    <div class="filter-container">
+        <div *ngFor="let option of landingFilterOptions" (click)="onLandFilterOptionsClick($event)">
+            <app-chip
+                [option]="option"
+                (yearFilterChanged)="onYearFilterChange($event)"
+                (launchFilterChanged)="onLaunchFilterChange($event)"
+                (landingFilterChanged)="onLandingFilterChange($event)"
+            ></app-chip>
+        </div>
+    </div>
+</div>
