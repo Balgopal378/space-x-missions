@@ -1,0 +1,15 @@
+<div class="container">
+    <section>
+        <app-filters
+            (yearFilterChanged)="onYearFilterChange($event)"
+            (launchFilterChanged)="onLaunchFilterChange($event)"
+            (landingFilterChanged)="onLandingFilterChange($event)"
+        ></app-filters>
+    </section>
+    <section class="card-section" *ngIf="launchList; else loading">
+        <div *ngFor="let item of launchList" class="card-container">
+            <app-card [launchDetail]="item"></app-card>
+        </div>
+    </section>
+    <ng-template #loading>Loading.....</ng-template>
+</div>
