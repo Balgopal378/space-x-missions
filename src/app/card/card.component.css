@@ -1,14 +1,15 @@
 .card {
-    height: 380px;
+    height: 360px;
     background-color: white;
     border-radius: 0.3em;
     padding: 0.5em;
+    margin: 5px;
     overflow-y: scroll;
 }
 
 .card img {
-    height: 50%;
-    width: 50%;
+    height: 150px;
+    width: 60%;
     background-color: #dee0df;
 }
 
@@ -22,7 +23,7 @@
 
 .details-entry {
     display: grid;
-    grid-template-columns: 50% 50%;
+    grid-template-columns: 1fr 1fr;
     margin: 0.2em;
 }
 
@@ -31,5 +32,11 @@
 }
 
 .details-entry ul {
-    margin-top: inherit;
+    margin-top: unset;
+    margin-left: -25px;
+}
+
+.details-entry-title, .details-entry-value {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 14px;
 }

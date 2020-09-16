@@ -1,12 +1,17 @@
 .container {
     display: grid;
-    overflow: scroll;
     background-color: #dee0df;
 }
 
 .card-container {
     display: grid;
     margin-top: 5px;
+}
+
+.card-section {
+    margin-top: -5px;
+    display: grid;
+    grid-template-columns: 1fr;
 }
 
 /* For tablets */
@@ -19,9 +24,7 @@
     }
     .card-section {
         margin-top: -5px;
-    }
-
-    .card-container {
+        display: grid;
         grid-template-columns: 1fr 1fr;
     }
 }
@@ -35,7 +38,8 @@
         overflow: scroll;
     }
 
-    .card-container {
+    .card-section {
+        display: grid;
         grid-template-columns: 1fr 1fr 1fr 1fr;
     }
 }

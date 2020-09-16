@@ -1,13 +1,19 @@
 .chip {
-    background-color: #acf2b0;
+    background-color: #98DB7B;
     border: none;
-    padding: 0.3em;
     outline:none;
-    margin: 0.5em;
+    color: white;
+    padding: 5px 23px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 5px;
+    border-radius: 8px;
 }
 
 .active{
-    background-color: #2fd438;
+    background-color: #48B41B;
     border: none;
     outline:none;
 }
