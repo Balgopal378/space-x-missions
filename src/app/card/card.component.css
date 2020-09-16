@@ -1,0 +1,35 @@
+.card {
+    height: 380px;
+    background-color: white;
+    border-radius: 0.3em;
+    padding: 0.5em;
+    overflow-y: scroll;
+}
+
+.card img {
+    height: 50%;
+    width: 50%;
+    background-color: #dee0df;
+}
+
+.image {
+    text-align: center;
+}
+
+.title {
+    color: rgb(75, 13, 243);
+}
+
+.details-entry {
+    display: grid;
+    grid-template-columns: 50% 50%;
+    margin: 0.2em;
+}
+
+.details-entry .details-entry-title {
+    font-weight: 700;
+}
+
+.details-entry ul {
+    margin-top: inherit;
+}
