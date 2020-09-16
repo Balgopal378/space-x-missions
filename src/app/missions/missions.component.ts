@@ -2,7 +2,7 @@ import { Component, OnInit, Input, OnDestroy } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 
 import { Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
+import { takeUntil, switchMap } from 'rxjs/operators';
 
 import { LaunchDetail } from '../models/launch-detail';
 import { ApiService } from '../services/api.service';
@@ -16,6 +16,8 @@ import { SearchParams } from '../enums/search-params.enum';
 export class MissionsComponent implements OnInit, OnDestroy {
     private readonly destroy$ = new Subject<void>();
     @Input() launchList: LaunchDetail[];
+
+    showSpinner = true;
 
     prevQueryParam = {
         launch_year: null,
@@ -31,25 +33,21 @@ export class MissionsComponent implements OnInit, OnDestroy {
 
     ngOnInit(): void {
         this.activatedRoute.queryParams
+            .pipe(switchMap((params: Params) => this.loadMissions(params)))
             .pipe(takeUntil(this.destroy$))
-            .subscribe((params: Params) => {
-                if (params && Object.keys(params).length > 0) {
-                    this.loadMissions(params);
-                } else {
-                    this.loadMissions();
-                }
+            .subscribe((data: LaunchDetail[]) => {
+                this.launchList = data;
+                this.showSpinner = false;
             });
     }
 
     private loadMissions(filters?: Params) {
-        this.apiService.getLaunches(filters).pipe(takeUntil(this.destroy$)).subscribe((data: LaunchDetail[]) => {
-            this.launchList = data;
-        });
+        this.showSpinner = true;
+        return this.apiService.getLaunches(filters);
     }
 
     private navigate(route: any[], queryParams: { [key: string]: any }) {
         queryParams = this.remeberLastQuery(this.encodeQueryParam(queryParams));
-        // queryParams = this.encodeQueryParam(queryParams);
         this.router.navigate(route, {
             relativeTo: this.activatedRoute,
             queryParams,
