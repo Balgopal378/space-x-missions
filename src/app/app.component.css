@@ -7,6 +7,13 @@
     font-weight: bold;
 }
 
+footer {
+    text-align: center;
+    font-size: 26px;
+    font-weight: 600;
+    margin-top: 20px;
+}
+
 /* For tablets */
 @media (min-width: 700px) {
     .wrapper header {

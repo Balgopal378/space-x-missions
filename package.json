@@ -1,6 +1,8 @@
 {
   "name": "space-x-missions",
   "version": "0.0.0",
+  "author": "Balgopal Prusty",
+  "description": "A Portal to search spaceX programs",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
