@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, OnDestroy } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 
-import { Subject } from 'rxjs';
+import { Subject, Observable } from 'rxjs';
 import { takeUntil, switchMap } from 'rxjs/operators';
 
 import { LaunchDetail } from '../models/launch-detail';
@@ -41,7 +41,7 @@ export class MissionsComponent implements OnInit, OnDestroy {
             });
     }
 
-    private loadMissions(filters?: Params) {
+    private loadMissions(filters?: Params): Observable<LaunchDetail[]> {
         this.showSpinner = true;
         this.prevQueryParam = { ...this.prevQueryParam, ...filters };
         return this.apiService.getLaunches(filters);
@@ -72,7 +72,7 @@ export class MissionsComponent implements OnInit, OnDestroy {
         return encodedQueryParams;
     }
 
-    private remeberLastQuery(params: { [key: string]: string }) {
+    private remeberLastQuery(params: { [key: string]: string }): { [key: string]: string } {
 
         const updatedParam = { ...this.prevQueryParam, ...params };
         if (params.launch_year === this.prevQueryParam.launch_year) {

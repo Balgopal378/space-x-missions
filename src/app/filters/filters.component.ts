@@ -64,7 +64,7 @@ export class FiltersComponent implements OnInit, AfterViewInit {
     }
 
     onYearFilterOptionsClick(event) {
-        const clickedElement = event.target || event.srcElement;
+        const clickedElement: HTMLElement = event.target || event.srcElement;
         if ( clickedElement.nodeName === 'BUTTON' ) {
             if (this.previousYearElement === clickedElement) {
                 this.previousYearElement.classList.remove('active');
@@ -87,7 +87,7 @@ export class FiltersComponent implements OnInit, AfterViewInit {
     }
 
     onLaunchFilterOptionsClick(event) {
-        const clickedElement = event.target || event.srcElement;
+        const clickedElement: HTMLElement = event.target || event.srcElement;
         if ( clickedElement.nodeName === 'BUTTON' ) {
             if (this.previousLaunchElement === clickedElement) {
                 this.previousLaunchElement.classList.remove('active');
@@ -109,7 +109,7 @@ export class FiltersComponent implements OnInit, AfterViewInit {
     }
 
     onLandFilterOptionsClick(event) {
-        const clickedElement = event.target || event.srcElement;
+        const clickedElement: HTMLElement = event.target || event.srcElement;
         if ( clickedElement.nodeName === 'BUTTON' ) {
             if (this.previousLandElement === clickedElement) {
                 this.previousLandElement.classList.remove('active');
