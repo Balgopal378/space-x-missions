@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter, ViewChildren, ElementRef, QueryList, AfterViewInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, ViewChildren, QueryList, AfterViewInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
 import { LAUNCH_YEAR_FILTERS, SUCCESSFULL_LANDING_FILTERS, SUCCESSFULL_LAUNCH_FILTERS } from '../constants/filters.constant';
@@ -26,7 +26,7 @@ export class FiltersComponent implements OnInit, AfterViewInit {
 
     constructor(private readonly activatedRoute: ActivatedRoute) { }
 
-    ngOnInit(): void {
+    ngOnInit() {
         const landSuccess = this.activatedRoute.snapshot.queryParamMap.get('land_success');
         const launchSuccess = this.activatedRoute.snapshot.queryParamMap.get('launch_success');
         this.searchParams = {

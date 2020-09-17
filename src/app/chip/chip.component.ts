@@ -1,20 +1,15 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-chip',
   templateUrl: './chip.component.html',
   styleUrls: ['./chip.component.css']
 })
-export class ChipComponent implements OnInit {
+export class ChipComponent {
     @Input() option: {[key: string]: string};
     @Output() yearFilterChanged: EventEmitter<{[key: string]: string}> = new EventEmitter(null);
     @Output() launchFilterChanged: EventEmitter<{[key: string]: string}> = new EventEmitter(null);
     @Output() landingFilterChanged: EventEmitter<{[key: string]: string}> = new EventEmitter(null);
-
-    constructor() { }
-
-    ngOnInit(): void {
-    }
 
     onClick(val: {[key: string]: string}) {
         if (val.name === 'year') {
@@ -27,5 +22,4 @@ export class ChipComponent implements OnInit {
             this.landingFilterChanged.emit(val);
         }
     }
-
 }

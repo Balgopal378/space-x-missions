@@ -1,26 +1,48 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpErrorResponse, HttpParams, HttpParameterCodec } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpParams } from '@angular/common/http';
 
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { environment } from '../../environments/environment';
 import { LaunchDetail } from '../models/launch-detail';
 
-
+/**
+ * Provider for performing API requests
+ */
 @Injectable({
   providedIn: 'root'
 })
 export class ApiService {
+    /**
+     * The base spaceX URL
+     */
+    baseUrl = environment.config.apiUrl;
 
-    private readonly baseUrl = environment.config.apiUrl;
-
+    /**
+     * The constructor to initalze the class
+     *
+     * @param http Service to perform HTTP requests
+     */
     constructor(private readonly http: HttpClient) { }
 
+    /**
+     * Convert HttpErrorResponse into an ApiError
+     *
+     * @param response The HttpErrorResponse to convert
+     * @returns An ApiError representing the provided response
+     */
     private readonly handleError = (response: HttpErrorResponse): Observable<never> => {
         const apiError = { ...response };
         return throwError(apiError);
     }
 
+    /**
+     * Fetches the launch details
+     *
+     * @param filters The filters applied by the user
+     * @param limit The number of records to return
+     * @returns An observable of launch details
+     */
     getLaunches(filters = {}, limit = 100): Observable<LaunchDetail[]> {
         const params = this.createQueryParams({
             ...filters,
