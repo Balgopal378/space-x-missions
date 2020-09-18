@@ -1,6 +1,6 @@
 .card {
     height: 360px;
-    background-color: white;
+    background-color: var(--sub-bg-color);
     border-radius: 0.3em;
     padding: 0.5em;
     margin: 5px;
@@ -10,7 +10,7 @@
 .card img {
     height: 150px;
     width: 60%;
-    background-color: #dee0df;
+    background-color: var(--main-bg-color);
 }
 
 .image {

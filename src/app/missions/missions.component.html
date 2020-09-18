@@ -19,6 +19,7 @@
     </ng-template>
     
     <ng-template #noRecord>
-        <div class="no-records">We are sorry!!. Try different filters.</div>
+        <div *ngIf="!error" class="no-records">We are sorry!!. Try different filters.</div>
+        <div *ngIf="error" class="no-records error">We are sorry!!. Something went wrong</div>
     </ng-template>
 </div>

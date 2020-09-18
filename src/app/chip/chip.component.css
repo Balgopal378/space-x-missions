@@ -2,7 +2,7 @@
     background-color: #98DB7B;
     border: none;
     outline:none;
-    color: white;
+    color: var(--sub-bg-color);
     padding: 5px 23px;
     text-align: center;
     text-decoration: none;

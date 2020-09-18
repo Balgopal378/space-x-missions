@@ -19,6 +19,8 @@ export class MissionsComponent implements OnInit, OnDestroy {
 
     showSpinner = true;
 
+    error = null;
+
     prevQueryParam = {
         launch_year: null,
         launch_success: null,
@@ -38,7 +40,12 @@ export class MissionsComponent implements OnInit, OnDestroy {
             .subscribe((data: LaunchDetail[]) => {
                 this.launchList = data;
                 this.showSpinner = false;
-            });
+            },
+            (err) => {
+                this.showSpinner = false;
+                this.error = err;
+            }
+            );
     }
 
     private loadMissions(filters?: Params): Observable<LaunchDetail[]> {
